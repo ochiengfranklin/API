@@ -21,7 +21,7 @@ exports.signup = async (req, res) => {
 
         const hashedPassword = await doHash(password, 12);
 
-        const newUser = newUser({
+        const newUser = new User({
             email,
             password: hashedPassword,
         })
@@ -104,7 +104,7 @@ exports.sendVerificationCode = async (req, res) => {
         }
         const codeValue = Math.floor(Math.random() * 1000000).toString();
         let info = await transport.sendMail({
-            from: NODE_CODE_SENDING_EMAIL_ADRESS,
+            from: process.env.NODE_CODE_SENDING_EMAIL_ADDRESS,
             to: existingUser.email,
             subject: "Verification code",
             html: '<h1>' + codeValue + '</h1>'

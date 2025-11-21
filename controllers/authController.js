@@ -117,6 +117,7 @@ exports.sendVerificationCode = async (req, res) => {
             await existingUser.save();
             return res.status(200).json({success: true, message: "Code sent"})
         }
+        res.status(400).json({success: false, message: 'code sent failed'})
     } catch (error) {
         console.log(error);
         

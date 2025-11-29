@@ -4,6 +4,7 @@ const helmet = require('helmet')
 const express = require('express');
 const mongoose = require('mongoose')
 const authRouter = require('./routers/authRouter.js')
+const postsRouter = require('./routers/postsRouter.js')
 
 const app = express();
 
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
     
 });
 app.use('/api/auth', authRouter);
+app.use('/api/posts', postsRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`listening...`);

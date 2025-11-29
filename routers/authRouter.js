@@ -1,12 +1,17 @@
 const express = require('express');
-const authController = require('../controllers/authController.js')
+const authController = require('../controllers/authController.js');
+const { identifier } = require('../middlewares/identification.js');
 const router = express.Router();
 
 router.post('/signup', authController.signup)
 router.post('/signin', authController.signin)
-router.post('/signout', authController.signout)
+router.post('/signout', identifier, authController.signout)
 
-router.patch('/send-verificationcode', authController.sendVerificationCode);
+router.patch('/send-verificationcode', identifier, authController.sendVerificationCode);
+router.patch('/verify-verificationcode', identifier, authController.verifyVerificationCode);
+router.patch('/change-password', identifier, authController.changePassword);
+router.patch('/send-forgot-password-code',  authController.sendForgotPasswordCode);
+router.patch('/verify-forgot-password-code',   authController.verifyForgotPasswordCode);
     
 
 
